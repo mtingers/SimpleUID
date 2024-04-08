@@ -39,8 +39,8 @@ class Obfuscator:
             cls._obfuscate_map.append(cur_map)
             cls._obfuscate_map_r.append(cur_map_r)
 
-    def obfuscate(self, simple_id: int) -> str:
-        x = list(str(simple_id).zfill(31))
+    def obfuscate(self, simple_id: int, value_len: int, namespace_len: int) -> str:
+        x = list(str(simple_id).zfill(value_len + namespace_len))
         out = []
         for i in range(len(x)):
             c = self._obfuscate_map[i]
@@ -56,20 +56,28 @@ class Obfuscator:
 
 
 class SimpleUid:
-    def __init__(self, namespace_id: int, start_id: int = 0):
+    def __init__(
+        self, namespace_id: int, shape: tuple[int, int] = (32, 64), start_id: int = 0
+    ):
         self.namespace_id = namespace_id
-        id_str = str(start_id).zfill(20)
+        self.shape = shape
+        dimensions = (8, 16, 32, 64, 128)
+        if shape[0] not in dimensions or shape[1] not in dimensions:
+            raise ValueError(f"shape must one of: {dimensions}")
+        self.namespace_len = len(str(2 ** shape[0] - 1))
+        self.value_len = len(str(2 ** shape[1] - 1))
+        id_str = str(start_id).zfill(self.value_len)
         self.latest_id = int(f"{self.namespace_id}{id_str}")
         self.obfuscator = Obfuscator()
 
     def next_id(self, previous_id: int) -> int:
         previous_id = int(str(previous_id).split(str(self.namespace_id), 1)[1])
-        id_str = str(previous_id + 1).zfill(20)
+        id_str = str(previous_id + 1).zfill(self.value_len)
         self.latest_id = int(f"{self.namespace_id}{id_str}")
         return self.latest_id
 
     def obfuscate(self, simple_id: int) -> str:
-        return self.obfuscator.obfuscate(simple_id)
+        return self.obfuscator.obfuscate(simple_id, self.value_len, self.namespace_len)
 
     def deobfuscate(self, obfuscated_id: str) -> int:
         return self.obfuscator.deobfuscate(obfuscated_id)
@@ -79,7 +87,7 @@ def example():
     print("Running tests...")
     limit = 10000
 
-    simple_id = SimpleUid(1, start_id=0)
+    simple_id = SimpleUid(1, shape=(8, 32), start_id=0)
     simple_id2 = SimpleUid(2, start_id=0)
 
     import time
