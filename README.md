@@ -31,21 +31,21 @@ Note that value is left padded to 20 places to provide uniqueness (even though i
 Example breakdown:
 ```yaml
 namespace: 1
-    - id: 1
-        - output: 100000000000000000001
-    - id: 2
-        - output: 100000000000000000002
+    id: 1
+        output: 100000000000000000001
+    id: 2
+        output: 100000000000000000002
 
 namespace: 2
-    - id: 1
-        - output: 200000000000000000001
-    - id: 2
-        - output: 200000000000000000002
+    id: 1
+        output: 200000000000000000001
+    id: 2
+        output: 200000000000000000002
 ```
 
 
 ## Python Example
-```bash
+```
 ➜  SimpleUID git:(main) python simpleuid.py
 Running example...
 100000000000000000001 0AKUeoy8ISdmw6GQaku4EOYis2CMWgr 100000000000000000001
