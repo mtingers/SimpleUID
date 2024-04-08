@@ -10,7 +10,7 @@ SimpleUID - sequential IDs at scale
     
 ## Format
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                   32 bit uint (namespace)                      |
+    |                   32 bit uint (namespace)                     |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |                       64 bit uint                             |
     |                          (value)                              |
