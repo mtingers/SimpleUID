@@ -76,7 +76,7 @@ class SimpleUid:
 
 
 def example():
-    print("Running example...")
+    print("Running tests...")
     limit = 10000
 
     simple_id = SimpleUid(1, start_id=0)
@@ -102,9 +102,15 @@ def example():
 
     tdiff = time.monotonic() - tstart
     print(f"in {tdiff} seconds:")
-    print(f" - generated {limit*2} ids ({limit*2//tdiff}/s)")
+    print(f" - generated {limit*2} ids")
     print(f" - obfuscated {limit*2} ids")
     print(f" - deobfuscated and asserted {limit*2} ids")
+    tstart = time.monotonic()
+    for i in range(limit):
+        simple_id.next_id(simple_id.latest_id)
+    tdiff = time.monotonic() - tstart
+    print(f"speedtest took {tdiff} seconds:")
+    print(f" - generated {limit*2} ids ({limit*2//tdiff}/s)")
 
 
 if __name__ == "__main__":

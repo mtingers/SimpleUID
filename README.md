@@ -46,8 +46,8 @@ namespace: 2
 
 ## Python Example
 ```
-➜  SimpleUID git:(main) python simpleuid.py
-Running example...
+➜  SimpleUID git:(main) ✗ python simpleuid.py
+Running tests...
 100000000000000000001 0AKUeoy8ISdmw6GQaku4EOYis2CMWgr 100000000000000000001
 200000000000000000001 0AKUeoy8ISemw6GQaku4EOYis2CMWgr 200000000000000000001
 100000000000000001001 0AKUeoy8ISdmw6GQaku4EOYis2CNWgr 100000000000000001001
@@ -68,8 +68,11 @@ Running example...
 200000000000000008001 0AKUeoy8ISemw6GQaku4EOYis2CUWgr 200000000000000008001
 100000000000000009001 0AKUeoy8ISdmw6GQaku4EOYis2CVWgr 100000000000000009001
 200000000000000009001 0AKUeoy8ISemw6GQaku4EOYis2CVWgr 200000000000000009001
-in 0.10157691600034013 seconds:
- - generated 20000 ids (196895.0/s)
+in 0.09967562500969507 seconds:
+ - generated 20000 ids
  - obfuscated 20000 ids
  - deobfuscated and asserted 20000 ids
+speedtest took 0.0050337910070084035 seconds:
+ - generated 20000 ids (3973148.0/s)
+
 ```
