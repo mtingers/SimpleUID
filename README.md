@@ -14,31 +14,31 @@ SimpleUID is not a fixed size until initialized.  It takes a shape parameter to 
 
 For example, a 32x64 SimpleUID has a 2^32-1 amount of namespaces and 2^64-1 IDs available within the namespace.
 ```
-bits=96
-namespace_max=2^32-1
-id_max=2^64-1
-total_max=namespace_max * id_max
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |                   32 bit uint (namespace)                     |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |                       64 bit uint                             |
     |                          (value)                              |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-```
 
-
-```
-bits=80
-namespace_max=2^16-1
+bits=96
+namespace_max=2^32-1
 id_max=2^64-1
 total_max=namespace_max * id_max
+```
 
+
+```
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     | 16bit uint (namespace)      |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |                       64 bit uint                             |
     |                          (value)                              |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+bits=80
+namespace_max=2^16-1
+id_max=2^64-1
+total_max=namespace_max * id_max
 ```
 
 
