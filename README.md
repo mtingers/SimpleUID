@@ -1,44 +1,54 @@
 # SimpleUID
-SimpleUID - sequential IDs at scale
+SimpleUID - "sequential" IDs at scale
 
 ## Features
-- sharding/clustering ready (via namespace)
-- auto-incrementing (per namespace)
-- 4,294,967,295 unique namespaces available (aka shards/nodes)
+- auto-incrementable
+- variable namespace size and value size
 - ID obfuscation/deobfuscation for opaque layers
 
-    
-## Format SimpleUID-32x64
+  
+## Formats
+SimpleUID is not a fixed size until initialized.  It takes a shape parameter to define:
+- Namespace size
+- ID size
+
+For example, a 32x64 SimpleUID has a 2^32-1 amount of namespaces and 2^64-1 IDs available within the namespace.
+```
+bits=96
+namespace_max=2^32-1
+id_max=2^64-1
+total_max=namespace_max * id_max
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |                   32 bit uint (namespace)                     |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |                       64 bit uint                             |
     |                          (value)                              |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+```
 
-## Format SimpleUID-16x64
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                   16 bit uint (namespace)                     |
+
+```
+bits=80
+namespace_max=2^16-1
+id_max=2^64-1
+total_max=namespace_max * id_max
+
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    | 16bit uint (namespace)      |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |                       64 bit uint                             |
     |                          (value)                              |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+```
 
-## Format SimpleUID-32x32
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                   32 bit uint (namespace)                     |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                       32 bit uint                             |
-    |                          (value)                              |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 ### Format Examples
 
-Given a SimpleUID `100000000000000000001`, it can be broken down into two sections: namespace and value:
+Given a SimpleUID-32x64 `100000000000000000001`, it can be broken down into two sections: namespace and value:
 - namespace: 1
 - value: 1
 
-Given a SimpleUID `2100000000000000003818`:
+Given a SimpleUID-32x64 `2100000000000000003818`:
 - namespace: 21
 - value: 3818 
 
